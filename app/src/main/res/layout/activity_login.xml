@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#78909c"
+    tools:context="com.stefan.mykotlinproject.LoginActivity">
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
+        android:measureAllChildren="false"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/layout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:background="#fff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:backgroundTint="@color/colorPrimary"
+                android:orientation="horizontal"
+                android:weightSum="2">
+                <Button
+                    android:id="@+id/continue_btn"
+                    android:text="Continue"
+                    android:textColor="@color/colorTextOnSecondary"
+                    android:onClick="onClick"
+                    android:backgroundTint="@color/colorSecondary"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:padding="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/signup_btn"
+                    android:text="SignUp"
+                    android:onClick="onClick"
+                    android:layout_weight="1"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:padding="20dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout2"
+            android:layout_width="match_parent"
+            android:background="#fff"
+            android:padding="20dp"
+            android:layout_height="match_parent">
+            <EditText
+                android:id="@+id/signup_username"
+                android:hint="Enter Email"
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/signup_password"
+                android:hint="Enter Password"
+                android:inputType="textPassword"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/signup_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/signup_password_confirm"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/signup_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/proceed_btn"
+                android:text="Sign Me Up!"
+                android:textColor="@color/colorTextOnSecondary"
+                android:onClick="onClick"
+                android:backgroundTint="@color/colorSecondary"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/signup_password_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout3"
+            android:layout_centerInParent="true"
+            android:background="#fff"
+            android:padding="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <EditText
+                android:id="@+id/username_et"
+                android:hint="Enter Email"
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/password_et"
+                android:hint="Enter Password"
+                android:inputType="textPassword"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/username_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/forgot_password"
+                android:text="Forgot Password"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/login_button"
+                android:onClick="onClick"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/signin_btn"
+                android:text="Login"
+                android:textColor="@color/colorTextOnSecondary"
+                android:onClick="onClick"
+                android:backgroundTint="@color/colorSecondary"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/password_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_below="@+id/signin_btn"
+                android:layout_marginStart="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:onClick="onClick"
+                android:layout_gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp" />
+        </RelativeLayout>
+    </ViewFlipper>
+</RelativeLayout>

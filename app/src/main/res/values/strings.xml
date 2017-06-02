@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">MyKotlinProject</string>
+    <string name="facebook_app_id">1388501257899588</string>
+    <string name="fb_login_protocol_scheme">fb1388501257899588</string>
+    <string name="title_activity_main_tabbed">MainTabbedActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_main_bottom_tabbed">MainBottomTabbedActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
