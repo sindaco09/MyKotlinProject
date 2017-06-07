@@ -1,26 +1,35 @@
 package com.stefan.mykotlinproject
 
+import android.app.Fragment
+import android.app.FragmentManager
 import android.content.Intent
 import android.net.Uri
 import android.support.design.widget.TabLayout
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+
 import android.os.Bundle
+import android.support.design.widget.NavigationView
+import android.support.v13.app.FragmentPagerAdapter
+import android.support.v4.view.GravityCompat
+import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.Toast
 
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main_tabbed.*
+import kotlinx.android.synthetic.main.app_bar_navigation.*
 
-class MainTabbedActivity : AppCompatActivity(), FeedFragment.OnFragmentInteractionListener,FriendsFragment.OnFragmentInteractionListener {
+class MainTabbedActivity : AppCompatActivity(),
+        FeedFragment.OnFragmentInteractionListener,
+        FriendsFragment.OnFragmentInteractionListener,
+        NavigationView.OnNavigationItemSelectedListener,
+        View.OnClickListener{
 
-    private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
+    private lateinit var mSectionsPagerAdapter: SectionsPagerAdapter
     private lateinit var mAuth: FirebaseAuth
 
 
@@ -33,7 +42,7 @@ class MainTabbedActivity : AppCompatActivity(), FeedFragment.OnFragmentInteracti
         setSupportActionBar(toolbar)
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
+        mSectionsPagerAdapter = SectionsPagerAdapter(fragmentManager)
 
         // Set up the ViewPager with the sections adapter.
         view_pager.adapter = mSectionsPagerAdapter
@@ -43,12 +52,29 @@ class MainTabbedActivity : AppCompatActivity(), FeedFragment.OnFragmentInteracti
         tablayout.setupWithViewPager(view_pager)
         tablayout.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(view_pager))
 
+
+        val toggle = ActionBarDrawerToggle(
+                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        val navigationView = findViewById(R.id.nav_view) as NavigationView
+        val headerview = navigationView.getHeaderView(0)
+        val header = headerview.findViewById(R.id.nav_header) as LinearLayout
+        header.setOnClickListener {
+            val intent = Intent(baseContext,SimpleActivity::class.java).
+                    putExtra("fragment",ProfileFragment::class.java.simpleName)
+            startActivity(intent) }
+
+        nav_view.setNavigationItemSelectedListener(this)
+
+
     }
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main_tabbed, menu)
+        menuInflater.inflate(R.menu.activity_navigation_drawer, menu)
         return true
     }
 
@@ -84,6 +110,47 @@ class MainTabbedActivity : AppCompatActivity(), FeedFragment.OnFragmentInteracti
         finish()
     }
 
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    override fun onClick(v: View) {
+
+    }
+
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        // Handle navigation view item clicks here.
+        Toast.makeText(baseContext,"SOMETHING",Toast.LENGTH_SHORT).show()
+        when (item.itemId) {
+            R.id.nav_camera -> {
+                // Handle the camera action
+                Toast.makeText(baseContext,"CAMERA",Toast.LENGTH_SHORT).show()
+            }
+            R.id.nav_gallery -> {
+
+            }
+            R.id.nav_slideshow -> {
+
+            }
+            R.id.nav_manage -> {
+
+            }
+            R.id.nav_share -> {
+
+            }
+            R.id.nav_send -> {
+
+            }
+        }
+
+        drawer_layout.closeDrawer(GravityCompat.START)
+        return true
+    }
 
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

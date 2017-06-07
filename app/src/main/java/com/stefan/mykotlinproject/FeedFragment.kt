@@ -1,21 +1,21 @@
 package com.stefan.mykotlinproject
 
 import android.app.Activity.RESULT_OK
+import android.app.Fragment
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupWindow
 import com.stefan.mykotlinproject.Adapters.FeedRAdapter
 import com.stefan.mykotlinproject.Models.FeedItem
 import kotlinx.android.synthetic.main.fragment_feed.*
+import kotlinx.android.synthetic.main.fragment_feed.view.*
 
-class FeedFragment : Fragment(),View.OnClickListener {
+class FeedFragment : Fragment(), View.OnClickListener {
 
     private var mListener: OnFragmentInteractionListener? = null
     val MESSAGE_CODE = 202
@@ -27,7 +27,10 @@ class FeedFragment : Fragment(),View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.fragment_feed, container, false)
+        val view = inflater!!.inflate(R.layout.fragment_feed, container, false)
+
+        view.fab.setOnClickListener(this)
+        return view
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -40,12 +43,22 @@ class FeedFragment : Fragment(),View.OnClickListener {
     override fun onResume() {
         super.onResume()
         val list: MutableList<FeedItem> = ArrayList()
-        (0..3).mapTo(list) { FeedItem(id= it.toString()) }
+        (0..10).mapTo(list) { FeedItem(id= it.toString()) }
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = FeedRAdapter(context,list = list)
 
 
+    }
+
+    override fun onClick(v: View) {
+        when(v.id){
+            fab.id-> {
+                val intent = Intent(context, SimpleActivity()::class.java)
+                intent.putExtra("fragment",MessageFragment::class.java.simpleName)
+                startActivityForResult(intent, MESSAGE_CODE)
+            }
+        }
     }
 
     override fun onAttach(context: Context?) {
@@ -62,12 +75,6 @@ class FeedFragment : Fragment(),View.OnClickListener {
         mListener = null
     }
 
-    override fun onClick(v: View) {
-        when(v.id){
-            fab.id -> startActivityForResult(Intent(context,MessageActivity()::class.java),MESSAGE_CODE)
-
-        }
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

@@ -17,4 +17,6 @@
     <!--Text Color (use 95%-67% opacity)-->
     <color name="colorTextOnPrimary">#ffffff</color>
     <color name="colorTextOnSecondary">#000000</color>
+
+    <color name="control_background">#cc4285f4</color>
 </resources>
